@@ -113,117 +113,125 @@ class _CardsPageState extends State<CardsPage> {
                   ),
                   color: Color(0xffffffff),
                 ),
-                child: SafeArea(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        if (cardDataList.isEmpty)
-                          const Padding(
-                            padding: EdgeInsets.only(top: 20.0),
-                            child: Text(
-                              'No cards added yet',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.06,
+                  ),
+                  child: SafeArea(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          if (cardDataList.isEmpty)
+                            const Padding(
+                              padding: EdgeInsets.only(top: 20.0),
+                              child: Text(
+                                'No cards added yet',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          )
-                        else
-                          SizedBox(
-                            height: screenHeight * 0.6,
-                            child: PageView.builder(
-                              controller: _controller,
-                              onPageChanged: (index) {
-                                setState(() {
-                                  currentPageIndex = index;
-                                });
-                              },
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 0, left: 25, right: 25, bottom: 15),
-                                  child: Card(
-                                    color: const Color.fromARGB(
-                                        255, 255, 252, 252),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    elevation: 10,
-                                    child: Stack(
-                                      clipBehavior: Clip.none,
-                                      children: <Widget>[
-                                        Positioned(
-                                          top: screenHeight * 0.025,
-                                          left: screenWidth * 0.07,
-                                          child: SizedBox(
-                                            width: screenWidth * 0.55,
-                                            child: AutoSizeText(
-                                              cardDataList[index].username,
-                                              maxLines: 2,
-                                              style: const TextStyle(
-                                                fontSize: 27.0,
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: 'Comfortaa',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              top: screenHeight * 0.05),
-                                          child: Center(
-                                            child: Transform.rotate(
-                                              angle: 3.14 / 2,
-                                              child: bw.BarcodeWidget(
-                                                data: cardDataList[index]
-                                                    .barcodeData,
-                                                barcode: bw.Barcode.code39(),
-                                                width: screenHeight * 0.45,
-                                                height: screenHeight * 0.2,
-                                                drawText: true,
+                            )
+                          else
+                            SizedBox(
+                              height: screenHeight * 0.6,
+                              child: PageView.builder(
+                                controller: _controller,
+                                onPageChanged: (index) {
+                                  setState(() {
+                                    currentPageIndex = index;
+                                  });
+                                },
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 0,
+                                        left: 25,
+                                        right: 25,
+                                        bottom: 15),
+                                    child: Card(
+                                      color: const Color.fromARGB(
+                                          255, 255, 252, 252),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      elevation: 10,
+                                      child: Stack(
+                                        clipBehavior: Clip.none,
+                                        children: <Widget>[
+                                          Positioned(
+                                            top: screenHeight * 0.025,
+                                            left: screenWidth * 0.07,
+                                            child: SizedBox(
+                                              width: screenWidth * 0.55,
+                                              child: AutoSizeText(
+                                                cardDataList[index].username,
+                                                maxLines: 2,
                                                 style: const TextStyle(
+                                                  fontSize: 27.0,
+                                                  fontWeight: FontWeight.bold,
                                                   fontFamily: 'Comfortaa',
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: screenHeight * 0.05),
+                                            child: Center(
+                                              child: Transform.rotate(
+                                                angle: 3.14 / 2,
+                                                child: bw.BarcodeWidget(
+                                                  data: cardDataList[index]
+                                                      .barcodeData,
+                                                  barcode: bw.Barcode.code39(),
+                                                  width: screenHeight * 0.45,
+                                                  height: screenHeight * 0.2,
+                                                  drawText: true,
+                                                  style: const TextStyle(
+                                                    fontFamily: 'Comfortaa',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                              itemCount: cardDataList.length,
-                            ),
-                          ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 0.02 * screenHeight),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 185, 47, 37),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
+                                  );
+                                },
+                                itemCount: cardDataList.length,
                               ),
                             ),
-                            onPressed: cardDataList.isNotEmpty
-                                ? () {
-                                    if (_controller.page != null) {
-                                      showFullImage(cardDataList[
-                                          _controller.page!.round()]);
+                          Padding(
+                            padding: EdgeInsets.only(top: 0.015 * screenHeight),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 185, 47, 37),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                              ),
+                              onPressed: cardDataList.isNotEmpty
+                                  ? () {
+                                      if (_controller.page != null) {
+                                        showFullImage(cardDataList[
+                                            _controller.page!.round()]);
+                                      }
                                     }
-                                  }
-                                : null,
-                            child: Text(
-                              'View Full Card',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[100]),
+                                  : null,
+                              child: Text(
+                                'View Full Card',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[100]),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
