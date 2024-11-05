@@ -85,6 +85,7 @@ flutter:
   assets:
     - assets/images/
     - assets/animations/
+    - assets/images/paso.png
 
   fonts:
     - family: Outfit

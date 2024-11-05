@@ -58,8 +58,7 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     _widgetOptions = const [
       MenuPage(),
-      // CardsPage(),
-      Text("fssfsf  "),
+      CardsPage(),
       MapPage(), // Assuming MapPage is imported from info_page.dart
     ];
 
